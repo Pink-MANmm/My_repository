@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #top {
+            height: 100px;
+            background-color: black;
+        }
+
+        #lead {
+            width: 100%;
+            height: 50px;
+            background-color: aqua;
+            font: bold 30px/50px '宋体';
+            text-align: center;
+        }
+
+        #content {
+            height: 1600px;
+            background: url('../三件套入门+Dom+Bom+正则表达式/thumb-1920-1007095.png') no-repeat;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="top"></div>
+    <div id="lead">导航栏</div>
+    <div id="content"></div>
+</body>
+
+</html>
+<script src="jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script>
+    $(function () {
+        var $scrollHeight = $('#top').height()
+        var $margin = $('#lead').height()
+        $(window).scroll(function () {
+            if ($(this).scrollTop() >= $scrollHeight) {
+                $('#lead').css({
+                    position: 'fixed',
+                    top: 0,
+                    left: 0
+                })
+                $('#content').css({
+                    marginTop: $margin
+                })
+            } else {
+                $('#lead').css({
+                    position: 'static',
+                    top: 0,
+                    left: 0
+                })
+                $('#content').css({
+                    margin: 0
+                })
+            }
+        })
+    })
+</script>

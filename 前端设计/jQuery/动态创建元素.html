@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="button">
+    <div>
+        <p>what the fuck</p>
+    </div>
+</body>
+
+</html>
+<script src="jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script>
+    $(function () {
+        $('input').click(function () {
+            //$('div').html('<a href="">i am good</a>')
+            var $link = $('<a href="">i am good</a>')
+            //$('div').html($link)
+            //覆写div内内容
+            $('div').append($link)
+            //追加节点在结尾
+            console.log($link);
+            //$('div').prepend($link)
+            //追加节点在开头
+            //$('div').before($link)
+            //把元素$link插入到div前面，作为兄弟元素
+            //$('div').after($link)
+            //把元素$link插入到div后面，作为兄弟元素
+            //$link.appendTo($('div'))
+            //同append
+        })
+    })
+</script>

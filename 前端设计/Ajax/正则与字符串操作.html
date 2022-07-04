@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./jquery-3.5.1/jquery-3.5.1.min.js"></script>
+    <script>
+        var str = 'hello'
+        var pattern = /o/ //若为/x/则返回null
+        var res = pattern.exec(str)
+        console.log(res);
+        //------------------------------------------
+        var str1 = '<div>我是{{name}}</div>'
+        var pattern1 = /{{([a-zA-Z]+)}}/ //()表示一个分组
+        var res1 = pattern1.exec(str1)
+        console.log(res1);
+        //-------------------------------------------
+        //replace及多次调用replace
+        var str2 = '<div>{{name}}---{{age}}</div>'
+        var pattern2 = /{{\s*([a-zA-Z]+)\s*}}/
+        var patternResult = pattern2.exec(str2)
+        console.log(patternResult);
+        str2 = str2.replace(patternResult[0], patternResult[1])
+        console.log(str2);
+        patternResult = pattern2.exec(str2)
+        str2 = str2.replace(patternResult[0], patternResult[1])
+        console.log(str2);
+        patternResult = pattern2.exec(str2)
+        console.log(patternResult);
+        //循环while实现replace
+        var str3 = '<div>{{name}}   {{age}}</div>'
+        var pattern3 = /{{\s*([a-zA-Z]+)\s*}}/
+        var patternResult1 = null
+        while (patternResult1 = pattern3.exec(str3)) {
+            str3 = str3.replace(patternResult1[0], patternResult1[1])
+        }
+        console.log(str3);
+        //replace替换为真值
+        var data = { name: 'zs', age: 20 }
+        var str4 = '<div>{{name}}   {{age}}</div>'
+        var pattern4 = /{{\s*([a-zA-Z]+)\s*}}/
+        var patternResult2 = null
+        while (patternResult2 = pattern4.exec(str4)) {
+            str4 = str4.replace(patternResult2[0], data[patternResult2[1]])
+        }
+        console.log(str4);
+    </script>
+</body>
+
+</html>

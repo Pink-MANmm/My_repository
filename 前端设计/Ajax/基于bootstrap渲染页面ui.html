@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./bootstrap-3.4.1-dist/css/bootstrap.min.css">
+    <script src="jquery-3.5.1/jquery-3.5.1.min.js"></script>
+</head>
+
+<body style="padding: 15px;">
+    <div class="panel panel-default form-inline">
+        <!-- Default panel contents -->
+        <div class="panel-heading">添加图书</div>
+        <form class="panel-body">
+
+            <div class="input-group">
+                <div class="input-group-addon">书名</div>
+                <input type="text" class="form-control" id="iptBookname" placeholder="请输入" name="bookname">
+            </div>
+            <div class="input-group">
+                <div class="input-group-addon">作者</div>
+                <input type="text" class="form-control" id="iptAuthor" placeholder="请输入" name="author">
+            </div>
+            <div class="input-group">
+                <div class="input-group-addon">出版社</div>
+                <input type="text" class="form-control" id="iptPublisher" placeholder="请输入" name="publisher">
+            </div>
+            <button id="btnAdd" class="btn btn-primary" type="submit">添加</button>
+        </form>
+
+        <!-- Table -->
+        <table class="table table-bordered table-hover">
+            <thead>
+                <th>ID</th>
+                <th>书名</th>
+                <th>作者</th>
+                <th>出版社</th>
+                <th>操作</th>
+            </thead>
+            <tbody id="tb">
+
+            </tbody>
+        </table>
+    </div>
+    <script src="./渲染页面ui.js"></script>
+    <script>
+        $(window).ui()
+    </script>
+</body>
+
+</html>

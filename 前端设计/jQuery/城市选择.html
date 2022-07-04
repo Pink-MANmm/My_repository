@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #select1,
+        #select2 {
+            position: relative;
+            display: inline-block;
+            width: 180px;
+            overflow: hidden;
+            border-radius: 5px;
+        }
+
+        #func {
+            position: relative;
+            top: -248px;
+            width: 75px;
+            height: 400px;
+            display: inline-block;
+        }
+
+        select {
+            border: none;
+            width: 200px;
+            height: 406px;
+            background-color: aqua;
+        }
+
+        option {
+            width: 200px;
+            height: 100px;
+            text-align: center;
+            font: bold 50px/100px '宋体';
+        }
+    </style>
+</head>
+
+<body>
+    <div id="select1">
+        <select name="" multiple id="s1">
+            <option value="上海" class="city">上海</option>
+            <option value="深圳" class="city">深圳</option>
+            <option value="广东" class="city">广东</option>
+            <option value="北京" class="city">北京</option>
+        </select>
+    </div>
+    <div id="func">
+        <input type="button" value="addAll" id="addAll">
+        <input type="button" value="removeAll" id="removeAll">
+        <input type="button" value="add" id="add">
+        <input type="button" value="remove" id="remove">
+        <input type="button" value="empty" id="empty">
+        <input type="button" value="clear" id="clear">
+        <input type="button" value="clone" id="clone">
+    </div>
+    <div id="select2">
+        <select name="" multiple id="s2"></select>
+    </div>
+</body>
+
+</html>
+<script src='jquery-3.5.1/jquery-3.5.1.min.js'></script>
+<script>
+    $(function () {
+        $('#addAll').click(function () {
+            $('#s1>option').appendTo($('#s2'));
+        });
+        $('#removeAll').click(function () {
+            $('#s2>option').appendTo($('#s1'))
+        })
+        $('#add').click(function () {
+            $('#s1>option:selected').appendTo($('#s2'))
+        })
+        $('#remove').click(function () {
+            $('#s2>option:selected').appendTo($('#s1'))
+        })
+        $('#empty').click(function () {
+            $('#s1,#s2').empty()
+        })
+        $('#clear').click(function () {
+            $('#s1>option:selected,#s2>option:selected').remove()
+        })
+        $('.city').click(function () {
+            alert('hh')
+        })
+        $('#clone').click(function () {
+            var $clone = $('#s1>option:selected').clone(false)//参数是true表示会把事件一起克隆到，参数是false就不会克隆事件(不给参数默认为false)
+            //修改克隆节点的class
+            $clone.attr({
+                class: 'special',
+                id: 'special'
+            })//如果没有该属性则添加属性
+            //console.log($clone.attr('class'));获取属性
+            //$clone.removeAttr('class')
+            //$clone.removeAttr('class id')
+            $('#s2').append($clone)
+        })
+    });
+</script>

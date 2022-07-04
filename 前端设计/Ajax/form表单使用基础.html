@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="./login.html" target="_blank" method="post">
+        <!-- action指定表单提交的url地址，默认为当前地址 -->
+        <!-- -------------------------------------------------------------- -->
+        <!-- target指定何处打开action URL -->
+        <!-- _blank在新窗口打开；_self默认在相同的框架中打开；_parent在父框架集中打开（很少用）；_top在整个窗口中打开（很少用）；framename在制定的框架中打开（很少用） -->
+        <!-- -------------------------------------------------------------- -->
+        <!-- method用来规定以何种方式把表单数据提交到action URL -->
+        <!-- 默认情况下，method的值为get，表示通过URL地址的形式，把表单数据提交到action URL （使用较少）;另外一个可选值为post，该方式不会将发送的参数显示在地址中，而是以form data的形式隐蔽在Payload中-->
+        <!-- -------------------------------------------------------------- -->
+        <!-- enctype用来规定发送表单数据之间如何对数据进行编码 -->
+        <!-- 其可选值有三个，默认情况下为application/x-www-form-urlencoded，表示在发送前，编码所有的字符 -->
+        <!-- multipart/form-data不对字符编码，在使用包含文件上传控件的表单时，必须使用该值。☆简言之即涉及文件上传使用该值，不涉及就用默认值或者不设置enctype属性 -->
+        <!-- text/plain空格转换为‘+’加号，但不对特殊字符编码（很少用） -->
+        <input type="text" name="id">
+        <input type="text" name="sex">
+        <button type="submit">发送</button>
+    </form>
+</body>
+</html>
+<script src="jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script>
+    $(function(){
+        $('form').on('submit',function(e){
+            console.log(1);
+            e.preventDefault()
+            var data=$(this).serialize()
+            console.log(data);
+        })
+    })
+</script>

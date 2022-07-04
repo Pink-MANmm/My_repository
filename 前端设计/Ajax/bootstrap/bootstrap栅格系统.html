@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../bootstrap-3.4.1-dist/css/bootstrap.min.css">
+    <style>
+        [class^=col] {
+            border: 1px solid red;
+        }
+
+        .row2 div {
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <!-- 总共划分12分，一人占据三分平分 -->
+            <!-- 大屏为lg -->
+            <!-- 重屏为md -->
+            <!-- 小屏为sm -->
+            <!-- 超小屏为xs -->
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                <!-- 我们列嵌套最好加一个行row，这样可以取消父元素的padding值，而且高度自动和父级一样高 -->
+                <div class="row">
+                    <div class="col-lg-4 col-sm-6 ">一</div>
+                    <div class="col-lg-4 col-sm-6 ">二</div>
+                    <div class="col-lg-4 col-sm-6 ">三</div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">2</div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">3</div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">4</div>
+        </div>
+        <!-- ----------------------------------------------------------------------------------- -->
+        <!-- 列偏移 -->
+        <div class="row2">
+            <div class="col-lg-3">左侧</div>
+            <div class="col-lg-3 col-lg-offset-6">右侧</div>
+        </div>
+        <!-- ----------------------------------------------------------------------------------- -->
+        <!-- 列排序 -->
+        <div class="row2">
+            <div class="col-lg-4 col-lg-push-8">左侧</div>
+            <div class="col-lg-8 col-lg-pull-4">右侧</div>
+        </div>
+        <!-- ----------------------------------------------------------------------------------- -->
+        <!-- 响应式工具 -->
+        <div class="row2">
+            <div class="col-md-4 col-sm-4 col-xs-4 hidden-lg">1</div>
+            <div class="col-lg-4 col-sm-4 col-xs-4 hidden-md">2</div>
+            <div class="col-lg-4 col-md-4 col-xs-4 hidden-sm">3</div>
+            <div class="col-lg-4 col-sm-4 col-md-4 hidden-xs">4</div>
+        </div>
+    </div>
+</body>
+
+</html>

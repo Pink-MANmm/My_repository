@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>评论</title>
+    <style>
+        body {
+            background-color: rgb(20, 130, 137);
+            width: 1511.2px;
+        }
+
+        .wrap {
+            position: relative;
+            margin: 20px auto;
+            width: 800px;
+            height: 180px;
+        }
+
+        .textarea {
+            width: 800px;
+            height: 150px;
+            resize: none;
+            outline: none;
+            border-radius: 10px;
+            font-size: 18px;
+            padding-left: 20px;
+            padding-top: 10px;
+        }
+
+        .wrap div {
+            float: right;
+        }
+
+        .wordsnumber {
+            color: white;
+        }
+
+        .word {
+            color: white;
+        }
+
+        #send {
+            position: relative;
+            top: 7px;
+            left: 25px;
+            bottom: 10px;
+            width: 100px;
+            height: 30px;
+            background-color: black;
+            font-size: bold 14px '宋体';
+            border: 2px solid white;
+            border-radius: 5px;
+            color: white;
+            transition: all 0.5s;
+            cursor: pointer;
+        }
+
+        .contentlist {
+            width: 800px;
+            margin: 0 auto;
+        }
+
+        .ul {
+            position: relative;
+            top: 20px;
+            list-style: none;
+        }
+
+        #send:hover {
+            background-color: gray;
+        }
+
+        .userinfo {
+            position: relative;
+            top: -10px;
+            left: 15px;
+        }
+
+        .userinfo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .username {
+            position: absolute;
+            left: 56px;
+            top: -9px;
+            font-size: bold 15px '宋体';
+            line-height: 50px;
+        }
+
+        #date {
+            position: absolute;
+            left: 58px;
+            top: 26px;
+            color: #aaa;
+            font-size: 12px;
+        }
+
+        #del {
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            font-size: 20px;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        .content {
+            position: relative;
+            top: 0;
+            left: 40px;
+            width: 760px;
+            font-size: 17px;
+            color: #666;
+            word-break: break-all;
+        }
+
+        li {
+            position: relative;
+            width: 823px;
+            left: -38px;
+            padding: 20px 0;
+            list-style: none;
+            border-bottom: 1px dashed gray;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        .video1 {
+            position: absolute;
+            left: 5px;
+            top: 10px;
+            width: 322px;
+            height: 990px;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .video2 {
+            position: absolute;
+            left: 1212px;
+            top: 11px;
+            width: 300px;
+            height: 990px;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        #v1 {
+            position: relative;
+            left: -42px;
+        }
+
+        #v2 {
+            position: relative;
+            right: 1504px;
+        }
+
+        .backToTop {
+            display: none;
+            position: fixed;
+            left: 1100px;
+            top: 530px;
+            width: 80px;
+            height: 80px;
+            background-color: rgba(27, 78, 91, 0.51);
+        }
+
+        .backToTop:hover {
+            background-color: rgba(94, 140, 150, 0.51);
+        }
+
+        #topimg {
+            position: relative;
+            top: 25px;
+            left: 25px;
+        }
+    </style>
+    <script>
+        window.addEventListener('load', function () {
+            document.documentElement.scrollTop = 0
+        })
+    </script>
+</head>
+
+<body>
+    <div class="video1">
+        <video autoplay loop muted id="v1">
+            <source src="video/video.mpeg" type="video/mp4">
+        </video>
+    </div>
+    <div class="wrap">
+        <textarea placeholder="说点什么..." class="textarea" cols="30" rows="10" maxlength="200"></textarea>
+        <div>
+            <span class="wordsnumber">0</span>
+            <span class="word">/</span>
+            <span class="word">200</span>
+            <button id="send">发布</button>
+        </div>
+    </div>
+    <div class="contentlist">
+        <ul class="ul">
+        </ul>
+    </div>
+    <div class="video2">
+        <video autoplay loop muted id="v2">
+            <source src="video/video.mpeg" type="video/mp4">
+        </video>
+    </div>
+    <div class="backToTop"><img src="img/totop_hover.png" alt="" id="topimg"></div>
+    <script>
+        let send = document.querySelector('#send')
+        let wordsnumber = document.querySelector('.wordsnumber')
+        let textarea = document.querySelector('.textarea')
+        let li = document.querySelector('li')
+        let ul = document.querySelector('ul')
+        let data = [
+            { pic: 'img/Zed.png', name: '劫' },
+            { pic: 'img/Yasuo.png', name: '亚索' },
+            { pic: 'img/XinZhao.png', name: '赵信' },
+            { pic: 'img/Warwick.png', name: '沃里克' },
+            { pic: 'img/TwistedFate.png', name: '崔斯特' },
+            { pic: 'img/Olaf.png', name: '奥拉夫' },
+            { pic: 'img/Lillia.png', name: '莉莉娅' },
+            { pic: 'img/Katarina.png', name: '卡特琳娜' },
+            { pic: 'img/Galio.png', name: '加里奥' },
+            { pic: 'img/Caitlyn.png', name: '凯瑟琳' },
+            { pic: 'img/Azir.png', name: '阿兹尔' },
+            { pic: 'img/Annie.png', name: '安妮' }
+        ]
+        textarea.addEventListener('input', function () {
+            wordsnumber.innerHTML = this.value.length
+        })
+        send.addEventListener('click', function () {
+            let date = new Date()
+            let hours = date.getHours()
+            hours < 10 ? hours = '0' + hours : hours
+            let minutes = date.getMinutes()
+            minutes < 10 ? minutes = '0' + minutes : minutes
+            let seconds = date.getSeconds()
+            seconds < 10 ? seconds = '0' + seconds : seconds
+            let li = document.createElement('li')
+            if (textarea.value === '') {
+                textarea.value = ''
+                wordsnumber.innerHTML = '0'
+                return alert('内容不能为空')
+            } else {
+                let randomnumber = getrandom(0, data.length)
+                /*li.innerHTML=`
+                <div class="userinfo">
+                    <img src="${data[randomnumber].pic}" alt="" style="width:50px ;height:50px ;">
+                    <span class="username">${data[randomnumber].name}</span>
+                    <span id="date">${date.getFullYear()}/${date.getMonth() + 1}/${date.getDay()} ${hours}:${minutes}:${seconds}</span>
+                </div>
+                <div class="content">${textarea.value}</div>
+                <span id="del">X</span>
+                `*/
+                li.innerHTML = `
+                <div class="userinfo">
+                    <img src="${data[randomnumber].pic}" alt="" style="width:50px ;height:50px ;">
+                    <span class="username">${data[randomnumber].name}</span>
+                    <span id="date">${date.toLocaleString()}</span>
+                </div>
+                <div class="content">${textarea.value}</div>
+                <span id="del">X</span>
+                `
+                textarea.value = ''
+                wordsnumber.innerHTML = '0'
+
+            }
+            function getrandom(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min
+            }
+            let randomnumber = getrandom(0, data.length)
+            ul.insertBefore(li, ul.children[0])
+            let del = li.querySelector('#del')
+            del.addEventListener('click', function () {
+                ul.removeChild(li)
+            })
+        })
+        textarea.addEventListener('keyup', function (e) {
+            if (e.key === 'Enter') {
+                send.click()
+                textarea.value = ''
+                wordsnumber.innerHTML = '0'
+            }
+        })
+        let backtotop = document.querySelector('.backToTop')
+        top.addEventListener('scroll', function () {
+            let num = document.documentElement.scrollTop
+            console.log(num);
+            if (num >= ul.offsetTop) {
+                backtotop.style.display = 'block'
+            } else {
+                backtotop.style.display = 'none'
+            }
+        })
+        backtotop.addEventListener('click', function () {
+            document.documentElement.scrollTop = 0
+        })
+    </script>
+</body>
+
+</html>

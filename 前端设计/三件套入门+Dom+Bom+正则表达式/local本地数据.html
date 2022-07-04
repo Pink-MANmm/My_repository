@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let uname = '王宝强'
+        //已经输入，将永久存入浏览器，可在多个页面获取该元素
+        localStorage.setItem('uname', uname)
+        console.log(localStorage.getItem('uname'));
+
+        let obj = {
+            age: 18,
+            name: '刘德华',
+        }
+        localStorage.setItem('obj', obj)
+        console.log(localStorage.getItem('obj'));
+        //如果要传入复杂数据类型（引用数据类型），就不需进行json转换为字符串类型
+        //json基本类型为双引号的数据格式
+        //let obj{
+        //    "age":18,
+        //    "name":"刘德华"，  
+        //}
+        let obj2 = {
+            age: 20,
+            name: '李连杰',
+        }
+        localStorage.setItem('obj2', JSON.stringify(obj2))
+        //想要获取obj2，直接获取为字符串，需要进行json转换为对象类型。
+        console.log(JSON.parse(localStorage.getItem('obj2')));
+    </script>
+</body>
+
+</html>

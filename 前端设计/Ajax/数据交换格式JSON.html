@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //(主流数据交换格式)JSON就是JavaScript对象和数组的字符串表示法，其本质是字符串,一种轻量级的文本数据交换格式，类似于XML，专门用于存储和传输数据，但比XML更小、更快、更易解析
+        //包含对象与数组两种结构
+        //对象结构：JSON中的表示为{}括起来的内容，数据结构为{key：value，key：value，...}的键值对结构，其中，key必须是使用英文的☆双引号☆包裹的字符串，value的数据类型可以使数字、字符串、布尔值、null、数值、对象6种类型
+        /*
+        {
+            "name":"zs",
+            "age":20,
+            "gender":"男",
+            "address":null,
+            "hobby":["吃饭","睡觉","打豆豆"]
+        }
+        */
+        //数组结构:JSON种表示为[]括起来的内容。数据结构为["java","javascript",30,true...]。数组中数据的类型可以是数字、字符串、布尔值、null、数组、对象6种类型
+        /*
+        ["java",100,true,{"name":"zs","age":20},["苹果","榴莲"]]
+        */
+        //----------------------------------------------------------------
+        //注意事项：
+        //属性名必须使用双引号包裹
+        //字符串类型的值必须使用双引号包裹
+        //JSON中不允许使用单引号表示字符串
+        //JSON中不能写注释
+        //JSON的最外层必须是对象或数组格式
+        //不能使用undefined或函数作为JSON的值
+        //-----------------------------------------------------------------
+        //JSON的作用：在计算机与网络之间存储和传输数据
+        //JSON的本质：用字符串来表示JavaScript对象数据或者数组数据
+        //-----------------------------------------------------------------
+        //这是一个对象
+        var obj = { a: 'hello', b: 'world' }
+        //这是一个JSON字符串，本质是一个字符串
+        var json = '{"a":"hello","b":"world"}'
+        //-----------------------------------------------------------------
+        //JSON与JS对象的互转
+        var obj1 = JSON.parse('{"a":"hello","b":"world"}')//parse也叫做反序列化----字符串转换为数据对象
+        console.log(obj1);
+        var obj2 = JSON.stringify({ a: 'hello', b: 'world' })//stringify也叫做序列化----数据对象转换为字符串
+        console.log(typeof obj2);
+        console.log(obj2);
+    </script>
+</body>
+
+</html>

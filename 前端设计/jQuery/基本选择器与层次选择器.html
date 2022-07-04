@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="div1" id="div1"></div>
+    <p></p>
+    <div id="father">
+        <div>
+            <div></div>
+            <p></p>
+        </div>
+        <div>
+            <div></div>
+            <p></p>
+        </div>
+        <div></div>
+        <p></p>
+        <p></p>
+    </div>
+</body>
+
+</html>
+<script src="jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script>
+    //基本选择器
+    $('.div1')
+    $('#div1')
+    $('div,p')//同时选择
+    $('div.div1')//class名字为div1的div标签
+    //------------------------------------------------
+    //层次选择器
+    //需求1：获取id为father这个元素的所有子div
+    $('#father>div');
+    //需求2：获取id为father这个元素的所有子div以及所有子p
+    $('#father>div,#father>p')
+    //需求3：获取id为father这个元素的所有后代div
+    console.log($('#father div'))
+</script>

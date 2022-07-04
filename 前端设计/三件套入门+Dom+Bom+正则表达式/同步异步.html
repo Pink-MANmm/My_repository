@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //同步任务，纳入执行栈
+        console.log(1);
+        //包含回调函数，纳入异步任务的任务队列，在执行栈任务中的同步任务执行完毕后，导入执行栈进行执行
+        document.addEventListener('click',function(){
+            console.log(4);
+        })
+        //同步任务，纳入执行栈
+        console.log(2);
+        //包含回调函数，纳入异步任务的任务队列，在执行栈任务中的同步任务执行完毕后，导入执行栈进行执行
+        setTimeout(function(){
+            console.log(3);
+        },3000)
+        //当存在多个异步任务时，谁先执行谁先加入执行栈执行，执行栈如此获取任务，执行任务，再获取任务，再执行任务的机制成为事件循环（event loop）
+    </script>
+</body>
+</html>

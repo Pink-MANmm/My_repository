@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper {
+            position: relative;
+            border-collapse: collapse;
+        }
+
+        ul {
+            position: relative;
+            width: 415px;
+            margin: 0;
+            padding: 0;
+            border: 1px solid rgba(155, 151, 151, 0.437);
+        }
+
+        .tab {
+            position: relative;
+            padding: 0;
+            margin: 0;
+            width: 100px;
+            height: 30px;
+            text-align: center;
+            font: normal 20px/30px '宋体';
+            display: inline-block;
+            border-top: 5px solid #fff;
+        }
+
+        .tab span {
+            position: absolute;
+            right: 0;
+            top: 10.5px;
+            display: block;
+            width: 1px;
+            height: 14px;
+            background-color: rgb(182, 177, 177);
+            overflow: hidden;
+        }
+
+        ul li.active {
+            border-top: 5px solid red;
+        }
+
+        #products {
+            position: relative;
+            margin: -1px 0 0 0;
+            width: 800px;
+            height: 300px;
+            border: 1px solid rgba(155, 151, 151, 0.437);
+            border-collapse: collapse;
+        }
+
+        #products div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+            width: 100%;
+            height: 100%;
+            background-color: aqua;
+        }
+
+        #products div.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <ul>
+            <li class="tab active">
+                国际大牌
+                <span>|</span>
+            </li>
+            <li class="tab">
+                国妆名牌
+                <span>|</span>
+            </li>
+            <li class="tab">
+                清洁用品
+                <span>|</span>
+            </li>
+            <li class="tab">
+                男士精品
+            </li>
+        </ul>
+        <div id="products">
+            <div class="box active">国际大牌</div>
+            <div class="box">国妆名牌</div>
+            <div class="box">清洁用品</div>
+            <div class="box">男士精品</div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script>
+    $(function () {
+        $('.tab').mouseenter(function () {
+            $(this).addClass('active').siblings().removeClass('active')
+            var idx = $(this).index()
+            $('.box').eq(idx).addClass('active').siblings().removeClass('active')
+        })
+    })
+</script>

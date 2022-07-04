@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div0 {
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+        }
+
+        #div {
+            width: 200px;
+            height: 200px;
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div0">
+        <input type="button" value="按钮">
+        <a href="www.baidu.com">跳转百度</a>
+    </div>
+    <br></br>
+    <div id="div"></div>
+</body>
+
+</html>
+<script src="jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script>
+    $(function () {
+        //默认事件与冒泡事件
+        $('#div0').on('click', function () {
+            alert('我是div事件')
+        })
+        $('input').on('click', function (e) {
+            alert('我是input事件')
+            e.stopPropagation();
+        })
+        $('a').on('click', function (e) {
+            alert('我是a事件')
+            e.stopPropagation();//阻止冒泡事件
+            e.preventDefault();//阻止默认事件
+            return false//既能阻止冒泡也能阻止默认事件
+        })
+        //键盘按下事件
+        $(document).on('keydown', function (e) {
+            console.log(e.keyCode);//能获取按下的是那个键
+            /*
+            if (e.keyCode == 13) {
+                $('#div').css('backgroundColor', 'pink')
+            } else {
+                $('#div').css('backgroundColor', 'yellow')
+            }*/
+            switch (e.keyCode) {
+                case 13:
+                    $('#div').css('backgroundColor', 'red');
+                    break
+                case 32:
+                    $('#div').css('backgroundColor', 'yellow')
+                    break
+                default:
+                    $('#div').css('backgroundColor', 'black')
+                    break
+            }
+        })
+        //end()方法：当操作对象变更时，采用end可以返回至上一个对象继续操作,但前提是end方法的作用对象必须是对象类型
+        $('#div0').css('backgroundColor', 'red').siblings('#div').css('backgroundColor', 'green').end().css('backgroundColor', 'balck')
+    })
+</script>

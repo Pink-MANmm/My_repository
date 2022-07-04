@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+        }
+
+        .two {
+            border: 1px solid green;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="button" value="按钮" id="btn">
+    <input type="button" value="按钮2" id="btn2">
+    <input type="button" value="按钮3" id="btn3">
+    </br>
+    <div></div>
+    <span style="border: 1px solid yellow;">我是一条span</span>
+</body>
+
+</html>
+<script src="jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script>
+    $(function () {
+        $('#btn').click(function () {
+            var $add = $('<div class="two"></div>')
+            $('body').append($add)
+        })
+        /*
+        //简单事件注册方法
+        //不支持同时注册，也不支持动态注册
+        $('div').mouseenter(function () {
+            console.log('鼠标进入');
+        })
+        $('div').click(function () {
+            console.log('鼠标点击');
+        })
+        //bind方式注册方法
+        //支持同时注册，不支持动态注册
+        $('div').bind({
+            mouseenter: function () {
+                console.log('鼠标进入');
+            },
+            click: function () {
+                console.log('点击事件');
+            }
+
+        })
+        //delegate方式注册方法
+        //支持同时注册，支持动态注册
+        $('body').delegate('div', {
+            mouseenter: function () {
+                console.log('鼠标进入');
+            },
+            click: function () {
+                console.log('点击事件');
+            }
+        })
+        */
+        //----------------------------------------------------------------------------------
+        //jquery1.7之后，jquery用on统一了所有事件的处理方式,以上了解即可
+        //on简单注册事件
+        //不支持动态注册
+        /*
+        $('div').on('click', function () {
+            console.log('被点击啦！');
+        })
+        */
+        //支持同时注册
+        /*
+        $('div').on({
+            'mouseenter': function () {
+                console.log('鼠标进入');
+            },
+            'click': function () {
+                console.log('点击事件');
+            }
+        })
+        */
+        //on委托注册
+        //支持动态注册
+        $('body').on('click', 'div,span', function () {
+            console.log('被点击啦！');
+        })
+        //用on（）注册事件，用off（）解绑
+        //$('div').off()//没有参数则解绑所有时间
+        //$('div').off('click')//有参数则解绑特定事件
+        //trigger触发器，一是代码的方式来触发事件，二是用来触发自定义事件
+        var i = 0
+        $('#btn2').on('click', function () {
+            i++
+            if (i == 3) {
+                //$('div').click()
+                $('div').trigger('click')
+            }
+        })
+        //自定义事件
+        $('div').on('linge', function () {
+            console.log('我是自定义事件');
+        })
+        $('#btn3').on('click', function () {
+            var res = confirm('linge帅吗')
+            if (res) {
+                $('div').trigger('linge')
+            }
+        })
+    })
+</script>

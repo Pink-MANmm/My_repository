@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .fontSize30 {
+            font-size: 30px;
+        }
+
+        .bc {
+            background-color: aqua;
+            width: 60px;
+            height: 60px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="button" value="添加类" id="addClass">
+    <input type="button" value="移除类" id="removeClass">
+    <input type="button" value="判断类" id="hasClass">
+    <input type="button" value="切换类" id="toggleClass">
+    <div id="div1" class="bgc">div1</div>
+</body>
+
+</html>
+<script src="jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script>
+    $(function () {
+        $('#addClass').click(function () {
+            $('#div1').addClass('fontSize30')
+            $('#div1').addClass('bc')
+        })
+        $('#removeClass').click(function () {
+            //$('#div1').removeClass('fontSize30')
+            //$('#div1').removeClass('bc')
+            $('#div1').removeClass()
+        })
+        $('#hasClass').click(function () {
+            console.log($('#div1').hasClass('fontSize30'))
+        })
+        $('#toggleClass').click(function () {
+            $('#div1').toggleClass('fontSize30')
+        })
+    })
+</script>

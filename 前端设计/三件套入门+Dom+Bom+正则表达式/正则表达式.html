@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正则表达式</title>
+</head>
+
+<body>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <button>send</button>
+    <div></div>
+    <script>
+        //正则表达式两步：1.定义正则表达式，2.检索字段
+        let reg = /前端/
+        let str = 'js-a-前端language'
+        console.log(reg.test(str));
+        console.log(reg.exec(str));
+        //-----------------------------------------
+        //正则表达式-元字符-边界符
+        //^表示以此为段首进行检索
+        //$表示依次为段尾进行检索
+        console.log(/^j/.test('js'));
+        console.log(/^j/.test('sj'));
+        console.log(/j$/.test('js'));
+        console.log(/j$/.test('sj'));
+        //同时存在^、$时表示精准定位，两者内部数据需与test对象完全一致
+        console.log(/^j$/.test('js'));
+        console.log(/^j$/.test('jj'));
+        console.log(/^j$/.test('j'));
+        console.log(/^js$/.test('js'));
+        //----------------------------------------
+        //正则表达式-元字符-量词
+        //*重复零次或更多次
+        console.log(/a*/.test('a'));
+        //+重复一次或更多次
+        console.log(/a+/.test('a'));
+        console.log(/a+/.test(''));
+        //？重复零次或一次
+        console.log(/a?/.test('a'));
+        console.log(/a?/.test('aa'));
+        //{n}重复n次
+        console.log(/a{2}/.test('aa'));
+        console.log(/a{2}/.test('aaa'));
+        //{n,}重复n次或更多次
+        console.log(/a{2,}/.test('a'));
+        console.log(/a{2,}/.test('aa'));
+        console.log(/a{2,}/.test('aaaaaaa'));
+        //{n,m}重复n到m次
+        console.log(/a{2,3}/.test('a'));
+        console.log(/a{2,3}/.test('aa'));
+        console.log(/a{2,3}/.test('aaa'));
+        console.log(/a{2,3}/.test('aaaa'));
+        //-----------------------------------------
+        //正则表达式-元字符-字符类
+        //[abc]表示只要检测的内容中有a、b、c中的任意一个即返回true
+        console.log(/[abc]/.test('a'));
+        console.log(/[abc]/.test('ab'));
+        console.log(/[abc]/.test('abc'));
+        console.log(/[abc]/.test('d'));
+        //返回false，以下只取a、b、c中的一个，总数仅能为1，而目标对象为三
+        console.log(/^[abc]$/.test('abc'));
+        //-连字符
+        //26个英文字母不区分大小写取其中一个
+        console.log(/^[a-zA-Z]$/.test('d'));
+        console.log(/^[a-zA-Z0-9]$/.test('d'));
+        console.log(/^[a-zA-Z0-9-]$/.test('d'));//还可以出现-
+        console.log(/^[a-zA-Z0-9-_]$/.test('d'));//还可以出现_
+        //qq号格式,量词只作用于前一个
+        console.log(/^[1-9][0-9]{9}$/.test('3332963602'));
+        //当^在[]内事，其表示取反符号,以下表示取a-b以外的任意字符
+        console.log(/^[^a-b]$/.test('1'));
+        console.log(/^[^a-b]$/.test('c'));
+        console.log(/^[^a-b]$/.test('a'));
+        //.匹配换行符之外的任意单个字符
+        console.log(/^.$/.test('c'));
+        //常见的简写方式
+        //\d匹配0-9之间的任一数字，相当于[0-9]
+        //\D匹配所有0-9以外的字符，相当于[^0-9]
+        //\w匹配任意的字母、数字和下划线，相当于[A-Za-z0-9_]
+        //\W除所有字母、数字和下划线以外的字符，相当于[^A-Za-z0-9_]
+        //\s匹配空格（包括换行符、制表符、空格符等），相当于[\t\r\n\v\f]
+        //注：\t:制表符，相当于Tab；\r:回车符，如123/r456得到的结果是456，会回到行首并覆盖；\n:换行符，作用是换行符之后的字符换到下一行；\v:垂直制表符，即垂直Tab,\f:换页符。
+        //\S匹配非空格的字符，相当于[^\t\r\n\v\f]
+        //-----------------------------------------
+        //汉字的第一位到最后一位
+        console.log(/^[\u4e00-\u9fa5]{2,8}$/.test('沈城'));
+        //-----------------------------------------
+        //修饰符i:不区分大小写，g:全局过滤
+        console.log(/^a$/i.test('a'));
+        console.log(/^a$/i.test('A'));
+        let textarea = document.querySelector('textarea')
+        let div = document.querySelector('div')
+        let button = document.querySelector('button')
+        button.addEventListener('click', function () {
+            div.innerHTML = textarea.value.replace(/激情|基情/g, '**')//未加g则只replace第一个找到的‘激情’或者‘基情’字样
+        })
+    </script>
+</body>
+
+</html>

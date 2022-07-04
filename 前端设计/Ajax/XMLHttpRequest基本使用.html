@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //创建XHR对象
+        var xhr = new XMLHttpRequest()//XML通HTML一样是标签语言，但XML用于数据存储与传输,而HTML用于网页页面的设计
+        //调用open函数
+        xhr.open('GET', 'http://www.liulongbin.top:3006/api/getbooks?id=1')//参数加在地址中?的后面查询字符串中，以&符号进行分隔
+        //调用send函数
+        xhr.send()
+        //监听onreadystatechange事件
+        xhr.onreadystatechange = function () {
+            //监听xhr对象的请求状态readyState；与服务器响应的状态status
+            if (xhr.readyState === 4 && xhr.status === 200) {//这里的status为xhr的一个判断条件
+                //打印服务器响应回来的数据
+                console.log(xhr.responseText);//这其中的status为数据的一部分
+                var obj = JSON.parse(xhr.responseText)
+                console.log(obj);
+            }
+        }
+        //---------------------------------------------------------------
+        //POST
+        var xhr1 = new XMLHttpRequest()
+        xhr1.open('POST', 'http://www.liulongbin.top:3006/api/addbook')
+        xhr1.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')//固定写法,必须在open之后
+        xhr1.send('bookname=水浒传&author=施耐庵&publisher=天津图书出版社')
+        xhr1.onreadystatechange = function () {
+            if (xhr1.readyState === 4 && xhr1.status === 200) {
+                console.log(xhr1.responseText);
+            }
+        }
+        //---------------------------------------------------------------
+        //URL编码与解码
+        console.log(encodeURI('黑马程序员'));
+        console.log(decodeURI('%E9%BB%91%E9%A9%AC'));
+    </script>
+</body>
+
+</html>

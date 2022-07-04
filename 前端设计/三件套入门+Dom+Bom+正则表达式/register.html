@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>兔鲜儿</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(222, 217, 221);
+        }
+
+        .xtx-card {
+            position: relative;
+            margin: 115px auto;
+            width: 1000px;
+            height: 1200px;
+            background-color: rgb(255, 252, 252);
+        }
+
+        .xtx-form {
+            position: absolute;
+            top: 100px;
+            left: 260px;
+            width: 500px;
+            height: 600px;
+        }
+
+        .xtx-form-item {
+            position: relative;
+            left: 0px;
+            margin: 0 auto;
+            width: 400px;
+            height: 85.7px;
+        }
+
+        input {
+            width: 320px;
+            height: 50px;
+            border: 0.5px solid rgb(189, 184, 184);
+            padding: 5px 40px;
+            font: normal 20px/50px '宋体';
+            border-radius: 5px;
+        }
+
+        input::-webkit-input-placeholder {
+            color: rgb(189, 184, 184);
+            font: normal 20px/50px '宋体';
+        }
+
+        .submit {
+            width: 400px;
+            height: 60px;
+            background-color: rgb(11, 145, 69);
+            border: none;
+            color: white;
+            font: normal 20px/60px '宋体';
+        }
+
+        .pl50 {
+            height: 60px;
+        }
+
+        .pl50 input {
+            position: relative;
+            width: 14px;
+            height: 14px;
+            cursor: pointer;
+        }
+
+        .pl50 a {
+            color: rgb(3, 173, 3);
+            text-decoration: none;
+        }
+
+        .sendcode {
+            position: absolute;
+            display: block;
+            right: 5px;
+            top: 0px;
+            width: 160px;
+            text-align: right;
+            text-decoration: none;
+            color: rgb(3, 173, 3);
+            font: normal 20px/60px '宋体';
+        }
+
+        span {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="xtx-card">
+        <form class="xtx-form">
+            <div data-prop="username" class="xtx-form-item">
+                <span class="iconfont icon-zhanghao"></span>
+                <input name='username' type="text" placeholder="设置用户名称">
+                <span class="msg"></span>
+            </div>
+            <div data-prop="phone" class="xtx-form-item">
+                <span class="iconfont icon-shouji"></span>
+                <input name='phone' type="text" placeholder="输入手机号码">
+                <span class="msg"></span>
+            </div>
+            <div data-prop="code" class="xtx-form-item">
+                <span class="iconfont icon-yanzhengma"></span>
+                <input name='code' type="text" placeholder="短信验证码">
+                <span class="msg"></span>
+                <a href="javascrip:" class="sendcode">发送验证码</a>
+            </div>
+            <div data-prop="password" class="xtx-form-item">
+                <span class="iconfont icon-mima"></span>
+                <input name='password' type="text" placeholder="设置6至20位字母、数字和符号组合">
+                <span class="msg"></span>
+            </div>
+            <div data-prop="confirm" class="xtx-form-item">
+                <span class="iconfont icon-querenmima"></span>
+                <input name='confirm' type="text" placeholder="请再次输入上面密码">
+                <span class="msg"></span>
+            </div>
+            <div class="xtx-form-item pl50">
+                <input type="checkbox">已阅读并同意<a href="" class="agree">《用户服务协议》</a>
+            </div>
+            <div class="xtx-form-item">
+                <button class="submit">下一步</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        (function () {
+            let sendcode = document.querySelector('.sendcode')
+            sendcode.addEventListener('click', function () {
+                let num = 5
+                function count() {
+                    num--
+                    sendcode.innerHTML = `0${num}秒后重新获取`
+                    if (num === 0) {
+                        sendcode.innerHTML = '发送验证码'
+                        clearInterval(timer)
+                    }
+                }
+                count()
+                let timer = setInterval(count, 1000)
+            })
+            //[name=username] 为css属性选择器
+            let username = document.querySelector('[name=username]')
+            username.addEventListener('change', verifyUsername)
+            function verifyUsername() {
+                let span = username.nextElementSibling
+                let reg = /^[a-zA-Z0-9-_]{6,10}$/
+                if (!reg.test(username.value)) {
+                    span.innerHTML = '请输入6~10位字符'
+                    username.style.border = '1px solid red'
+                    return false
+                    //若为false则表单无法提交
+                } else {
+                    span.innerHTML = ''
+                    username.style.border = '1px solid green'
+                    return true
+                }
+            }
+            let phone = document.querySelector('[name=phone]')
+            phone.addEventListener('change', verifyPhone)
+            function verifyPhone() {
+                let span = phone.nextElementSibling
+                let reg = /^1(3\d|4[5-9]|5[0-35-9]|6[567]|7[0-8]|8\d|9[0-35-9])\d{8}$/
+                if (!reg.test(phone.value)) {
+                    span.innerHTML = '请输入11位电话号码'
+                    phone.style.border = '1px solid red'
+                    return false
+                    //若为false则表单无法提交
+                } else {
+                    span.innerHTML = ''
+                    phone.style.border = '1px solid green'
+                    return true
+                }
+            }
+            let code = document.querySelector('[name=code]')
+            code.addEventListener('change', verifyCode)
+            function verifyCode() {
+                let span = code.nextElementSibling
+                let reg = /^\d{6}$/
+                if (!reg.test(code.value)) {
+                    span.innerHTML = '请输入6位验证码'
+                    code.style.border = '1px solid red'
+                    return false
+                    //若为false则表单无法提交
+                } else {
+                    span.innerHTML = ''
+                    code.style.border = '1px solid green'
+                    return true
+                }
+            }
+            let password = document.querySelector('[name=password]')
+            password.addEventListener('change', verifyPassword)
+            function verifyPassword() {
+                let span = password.nextElementSibling
+                let reg = /^[a-zA-Z0-9]{6,20}$/
+                if (!reg.test(password.value)) {
+                    span.innerHTML = '请输入6至20位字母、数字和符号组合的密码'
+                    password.style.border = '1px solid red'
+                    return false
+                    //若为false则表单无法提交
+                } else {
+                    span.innerHTML = ''
+                    password.style.border = '1px solid green'
+                    return true
+                }
+            }
+            let confirm = document.querySelector('[name=confirm]')
+            confirm.addEventListener('change', verifyConfirm)
+            function verifyConfirm() {
+                let span = confirm.nextElementSibling
+                let reg = /^[a-zA-Z0-9]{6,20}$/
+                if (confirm.value === '') {
+                    span.innerHTML = '此项不可为空'
+                    confirm.style.border = '1px solid red'
+                    return false
+                } else if (confirm.value !== password.value) {
+                    span.innerHTML = '两次密码输入不同'
+                    confirm.style.border = '1px solid red'
+                    return false
+                } else {
+                    span.innerHTML = ''
+                    confirm.style.border = '1px solid green'
+                    return true
+                }
+            }
+            let form = document.querySelector('form')
+            //此处submit由button触发
+            form.addEventListener('submit', function (e) {
+                if (!verifyUsername()) {
+                    //组织提交
+                    e.preventDefault()
+                    alert('用户名不可为空')
+                    return
+                }
+                if (!verifyCode()) {
+                    //组织提交
+                    e.preventDefault()
+                    alert('验证码不可为空')
+                    return
+                }
+                if (!verifyPhone()) {
+                    //组织提交
+                    e.preventDefault()
+                    alert('手机号码不可为空')
+                    return
+                }
+                if (!verifyPassword()) {
+                    //组织提交
+                    e.preventDefault()
+                    alert('密码不可为空')
+                    return
+                }
+                if (!verifyConfirm()) {
+                    //组织提交
+                    e.preventDefault()
+                    alert('密码不可为空')
+                    return
+                }
+                let agree = document.querySelector('.agree')
+                if (!agree.checked) {
+                    e.preventDefault()
+                    alert('请勾选协议')
+                    return
+                }
+            })
+        }());
+        //额外知识点1:切换：object.classList.toggle（'.classname'）调用一次，添加类名classname，再次调用则删除类名classname
+        //额外知识点2:查询：object.classList.contains（'.classname'），用于检验对象是否含有类名classname
+    </script>
+</body>
+
+</html>

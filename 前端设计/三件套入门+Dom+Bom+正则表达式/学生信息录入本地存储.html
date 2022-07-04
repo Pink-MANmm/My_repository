@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生录入</title>
+    <style>
+        .title {
+            width: 784px;
+            margin: 50px auto;
+        }
+
+        .title button {
+            width: 80px;
+            background-color: rgb(0, 119, 255);
+            font: normal 15px/25px '宋体';
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .table {
+            width: 800px;
+            margin: 100px auto;
+        }
+
+        table {
+            width: 800px;
+            border: none;
+            border-collapse: collapse;
+        }
+
+
+        table thead {
+            background-color: rgb(84, 137, 194);
+        }
+
+        th {
+            font: normal 15px/25px '宋体';
+            border: 1px solid rgb(62, 192, 224);
+            color: #fff;
+        }
+
+        td {
+            text-align: center;
+            border: 1px solid rgb(62, 192, 224);
+        }
+
+        .title button:hover {
+            background-color: rgb(0, 170, 255);
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+        }
+
+        tbody tr:hover {
+            background-color: rgb(62, 192, 224);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title">
+        学号: <input type="text" style="width: 70px;" class="stdcode" disabled>
+        姓名: <input type="text" style="width: 70px;" class="name">
+        年龄: <input type="text" style="width: 70px;" class="age">
+        性别: <select name="" id="" class="sex">
+            <option value="男">男</option>
+            <option value="女">女</option>
+        </select>
+        薪资: <input type="text" style="width: 70px;" class="salary">
+        就业城市: <select name="" id="" class="city">
+            <option value="广东">广东</option>
+            <option value="甘肃">甘肃</option>
+            <option value="四川">四川</option>
+            <option value="上海">上海</option>
+            <option value="深圳">深圳</option>
+            <option value="厦门">厦门</option>
+            <option value="香港">香港</option>
+            <option value="福建">福建</option>
+            <option value="浙江">浙江</option>
+        </select>
+        <button>提交</button>
+    </div>
+    <div class="table">
+        <table>
+            <thead>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>性别</th>
+                <th>薪资</th>
+                <th>就业城市</th>
+                <th>操作</th>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        function getLocaldata() {
+            let data = localStorage.getItem('data')
+            if (data) {
+                return JSON.parse(data)
+            } else {
+                let arr = [
+                    { stdcode: 10001, uname: '张三', age: 21, sex: '男', salary: 8000, city: '上海' },
+                    { stdcode: 10002, uname: '李四', age: 21, sex: '男', salary: 8000, city: '深圳' },
+                    { stdcode: 10003, uname: '王五', age: 21, sex: '女', salary: 8000, city: '广东' },
+                ]
+                localStorage.setItem('data', JSON.stringify(arr))
+            }
+        }
+        let arr = getLocaldata()
+        let send = document.querySelector('.title button')
+        let tbody = document.querySelector('table tbody')
+        let num = 0
+        function render() {
+            tbody.innerHTML = ''
+            for (let i = 0; i < arr.length; i++) {
+                let info = document.createElement('tr')
+                info.innerHTML = `
+                <tr>
+                    <td>
+                        <div>${arr[i].stdcode}</div>
+                    </td>
+                    <td>
+                        <div>${arr[i].uname}</div>
+                    </td>
+                    <td>
+                        <div>${arr[i].age}</div>
+                    </td>
+                    <td>
+                        <div>${arr[i].sex}</div>
+                    </td>
+                    <td>
+                        <div>${arr[i].salary}</div>
+                    </td>
+                    <td>
+                        <div>${arr[i].city}</div>
+                    </td>
+                    <td>
+                        <a href="Jscript:" id='${i}'>删除</a>
+                    </td>
+                </tr>
+                `
+                tbody.appendChild(info)
+                //tbody.insertBefore(info, tbody.children[0])
+            }
+        }
+        render()
+        send.addEventListener('click', function () {
+
+            let stdcode = document.querySelector('.stdcode')
+            let uname = document.querySelector('.name')
+            let age = document.querySelector('.age')
+            let sex = document.querySelector('.sex')
+            let salary = document.querySelector('.salary')
+            let city = document.querySelector('.city')
+            tbody.innerHTML = ''
+            arr.push({
+                stdcode: arr[arr.length - 1].stdcode + 1,
+                uname: uname.value,
+                age: age.value,
+                sex: sex.value,
+                salary: salary.value,
+                city: city.value,
+            })
+            localStorage.setItem('data', JSON.stringify(arr))
+            render()
+            uname.value = ''
+            age.value = ''
+            sex.value = '男'
+            salary.value = ''
+            city.value = '广东'
+        })
+
+        tbody.addEventListener('click', function (e) {
+            if (e.target.tagName === 'A') {
+                if (e.target.id === '0') {
+                    alert('该条内容不支持删除操作')
+                    return
+                }
+                arr.splice(e.target.id, 1)
+                localStorage.setItem('data', JSON.stringify(arr))
+                render()
+            }
+        })
+    </script>
+</body>
+
+</html>

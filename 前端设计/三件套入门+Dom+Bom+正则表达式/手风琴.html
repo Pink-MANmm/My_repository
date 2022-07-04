@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>手风琴</title>
+    <style>
+        body{
+            background-color: rgb(58, 53, 53);
+        }
+        .wrap{
+            position: relative;
+            
+            width: 1196px;
+            height: 298px;
+            margin: 50px auto;
+            background-color: aliceblue;
+            padding: 0px 0.5px;
+            transition: 1s;
+        }
+        .list{
+            overflow: hidden;
+            position: relative;
+            height: 296.25px;
+            float: left;
+            width: 298px;
+            margin: 1px 0.5px;
+            transition: 1s;
+            text-align: center;
+        }
+        #list1{
+            background-color: aqua;
+        }
+        #list2{
+            background-color: rgb(83, 221, 83);
+        }
+        #list3{
+            background-color: pink;
+        }
+        #list4{
+            background-color: rgb(215, 9, 9);
+        }
+        .content{
+            width: 870px;
+            height: 296.25px;
+            border: red;
+            padding: 0px 10px;
+        }
+        .img{
+            margin: 40px 10px;
+            float: left;
+        }
+        .text{
+            text-align: center;
+            color: white;
+            line-height: 21px;
+        }
+        .top, .bot{
+            position: absolute;
+            left: 0px;
+            width: 100%;
+            text-align: center;
+            height: 296.25px;
+            line-height: 296.25px;
+            background-color:  rgba(0,0,0,0.5);
+            transition: 1s;
+        }
+        .top{
+            top: 0;
+        }
+        .bot{
+            bottom: 0px;
+        }
+        .wrap:hover .list{
+            width: 107px;
+        }
+        .wrap .list:hover{
+            width:870px
+        }
+        .list:hover .top, .list:hover .bot{
+            height: 40px;
+            line-height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="list" id="list1">
+            <div class="content">
+                <div class="img">
+                    <img src="img/logo-mi2.png" alt="">
+                    <div class="text">web share</div>
+                </div>
+                <div class="img">
+                    <img src="img/logo-mi2.png" alt="">
+                    <div class="text">web share</div>
+                </div>
+                <div class="img">
+                    <img src="img/logo-mi2.png" alt="">
+                    <div class="text">web share</div>
+                </div>
+                <div class="img">
+                    <img src="img/logo-mi2.png" alt="">
+                    <div class="text">web share</div>
+                </div>
+                <div class="top">IT learn</div>
+                <div class="bot">IT learn</div>
+            </div>
+        </div>
+        <div class="list" id="list2">
+            <div class="content">
+                <div class="img">
+                    <img src="img/logo-mi2.png" alt="">
+                    <div class="text">web share</div>
+                </div>
+                <div class="img">
+                    <img src="img/logo-mi2.png" alt="">
+                    <div class="text">web share</div>
+                </div>
+                <div class="img">
+                    <img src="img/logo-mi2.png" alt="">
+                    <div class="text">web share</div>
+                </div>
+                <div class="img">
+                    <img src="img/logo-mi2.png" alt="">
+                    <div class="text">web share</div>
+                </div>
+                <div class="top">IT learn</div>
+                <div class="bot">IT learn</div>
+            </div>
+        </div>
+        <div class="list" id="list3">
+            <div class="content">
+                <div class="img">
+                    <img src="img/logo-mi2.png" alt="">
+                    <div class="text">web share</div>
+                </div>
+                <div class="img">
+                    <img src="img/logo-mi2.png" alt="">
+                    <div class="text">web share</div>
+                </div>
+                <div class="img">
+                    <img src="img/logo-mi2.png" alt="">
+                    <div class="text">web share</div>
+                </div>
+                <div class="img">
+                    <img src="img/logo-mi2.png" alt="">
+                    <div class="text">web share</div>
+                </div>
+                <div class="top">IT learn</div>
+                <div class="bot">IT learn</div>
+            </div>
+        </div>
+        <div class="list" id="list4">
+            <div class="content">
+                <div class="img">
+                    <img src="img/logo-mi2.png" alt="">
+                    <div class="text">web share</div>
+                </div>
+                <div class="img">
+                    <img src="img/logo-mi2.png" alt="">
+                    <div class="text">web share</div>
+                </div>
+                <div class="img">
+                    <img src="img/logo-mi2.png" alt="">
+                    <div class="text">web share</div>
+                </div>
+                <div class="img">
+                    <img src="img/logo-mi2.png" alt="">
+                    <div class="text">web share</div>
+                </div>
+                <div class="top">IT learn</div>
+                <div class="bot">IT learn</div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

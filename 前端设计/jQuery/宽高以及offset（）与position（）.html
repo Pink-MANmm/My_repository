@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            margin: 1px;
+            padding: 1px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+</body>
+
+</html>
+<script src="jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script>
+    $(function () {
+        console.log($('div').width());
+        console.log($('div').height());
+        //div宽高不包括内外边距以及边框
+        console.log($('div').innerWidth());
+        console.log($('div').innerHeight());
+        //div宽高包括本身以及内边距
+        console.log($('div').outerWidth());
+        console.log($('div').outerHeight());
+        //div宽高包括本身、内边距以及边框
+        console.log($('div').outerWidth(true));
+        console.log($('div').outerHeight(true));
+        //div宽高包括本身、内边距、边框、以及外边距
+        //--------------------------------------------------
+        //offset()，获取一个对象，内部包含left与top
+        console.log($('div').offset())//获取元素距离document的位置
+        //position(),获取一个对象，对象包含top与left
+        console.log($('div').position());//获取元素距离有定位的父元素的位置
+    })
+</script>

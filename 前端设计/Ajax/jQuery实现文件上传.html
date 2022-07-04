@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-3.5.1/jquery-3.5.1.min.js"></script>
+</head>
+
+<body>
+    <input type="file" id="file1">
+    <button id="btnUpload">上传文件</button>
+    <div class="progress" style="width: 500px;margin:15px 10px;">
+        <div class="progress-bar progress-bar-striped active" style="width: 0%" id="percent">
+        </div>
+    </div>
+    <br />
+    <div id="ajaxstart" style="display: none;">正在加载中</div>
+    <script>
+        $(function () {
+            $('#btnUpload').on('click', function () {
+                var files = $('#file1')[0].files//此处注意要将jquery对象转换为dom对象，否则无法调用length
+                if (files.length <= 0) {
+                    return alert('请选择图片后在上传')
+                }
+                var fd = new FormData()
+                fd.append('avatar', files[0])
+                $.ajax({
+                    method: 'POST',
+                    url: 'http://liulongbin.top:3006/api/upload/avatar',
+                    data: fd,
+                    contentType: false,//表示不修改Content-Type属性，使用FormData默认的Content-Type值
+                    processData: false,//表示不带队FormData中的数据进行url编码，而是将FormData数据原样发送到服务器
+                    //如果调用ajax上传文件，就一定要添加contentType和processData两个属性，且一定要为false
+                    success: function (res) {
+                        console.log(res);
+                    }
+                })
+            })
+            //---------------------------------------------------------------------------------------------
+            //ajaxStart(callback)
+            //$(document).ajaxStart()函数会监听当前文档内所有的Ajax请求
+            $(document).ajaxStart(function () {
+                $('#ajaxstart').show()
+            })
+            $(document).ajaxStop(function () {
+                $('#ajaxstart').hide()
+            })
+        })
+    </script>
+</body>
+
+</html>

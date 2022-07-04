@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .parentWrap {
+            padding: 0;
+            position: relative;
+            width: 400px;
+            list-style: none;
+            border: 2px solid black;
+        }
+
+        .menuGroup {
+            margin: 0;
+        }
+
+        .groupTitle {
+            background-color: aqua;
+            display: block;
+            text-align: center;
+            width: 400px;
+            height: 40px;
+            font: normal 30px/40px '宋体';
+            border-bottom: 1px solid gray;
+            cursor: pointer;
+        }
+
+        div {
+            display: none;
+            width: 400px;
+            height: 160px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="parentWrap">
+        <li class="menuGroup">
+            <span class="groupTitle">标题1</span>
+            <div>我是弹出来的div1</div>
+        </li>
+        <li class="menuGroup">
+            <span class="groupTitle">标题2</span>
+            <div>我是弹出来的div2</div>
+        </li>
+        <li class="menuGroup">
+            <span class="groupTitle">标题3</span>
+            <div>我是弹出来的div3</div>
+        </li>
+        <li class="menuGroup">
+            <span class="groupTitle">标题4</span>
+            <div>我是弹出来的div4</div>
+        </li>
+    </ul>
+</body>
+
+</html>
+<script src="jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script>
+    $('.parentWrap >.menuGroup').click(function () {
+        //jquery隐式迭代
+        //jquery链式编程，在于一个方法返回的是一个jquery对象，既然是jquery对象就可以继续点出jquery的方法来
+        $(this).children('div').show().parent().siblings('li').children('div').hide();
+    })
+</script>

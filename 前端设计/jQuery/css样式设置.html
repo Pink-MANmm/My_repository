@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="setBtn">设置样式</button>
+    <button id="getBtn">获取样式</button>
+    <div class="div1" id="div1"></div>
+    <div class="div1"></div>
+</body>
+
+</html>
+<script src="jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script>
+    $(function () {
+        $('#setBtn').click(function () {
+            //设置单样式
+            $('#div1').css('width', '200px')
+            $('#div1').css('height', 200)
+            $('#div1').css('backgroundColor', 'red')
+            $('#div1').css('background-color', 'red')
+            $('#div1').css('border-top-width', '10px')
+            $('#div1').css('border-top-color', 'yellow')//注意ie浏览器中，css内border必须注明是那条边，不可以直接border，否则无法查询
+            $('#div1').css('border', '1px solid black')//而在google浏览器中，上述border方式无效
+            //设置多样式
+            $('#div1').css({
+                'width': '200px',
+                height: 200,
+                backgroundColor: 'red',
+                'background-color': 'red',//有‘-’的一定要加引号
+                'border': '1px solid black'
+            })
+        })
+        $('#getBtn').click(function () {
+            console.log($('.div1').css('height'));//且css方法在获得包含多个dom元素的jquery对象的样式，只能获得到第一个dom对象的样式
+        })
+    })
+    //css方式添加的样式直接添加到标签内
+</script>

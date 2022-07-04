@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>事件流动</title>
+    <style>
+        .father{
+            margin: 100px auto;
+            width: 500px;
+            height: 500px;
+            background-color: pink;
+        }
+        .son{
+            width: 200px;
+            height: 200px;
+            background-color: purple;
+        }
+    </style>
+</head>
+<body>
+    <div class="father">
+        <div class="son">
+        </div>
+    </div>
+    <a href="http://www.baidu.com">跳转到百度</a>
+    <script>
+        let father=document.querySelector('.father')
+        let son= document.querySelector('.son')
+        father.addEventListener('click',function(){
+            alert('i am father')
+        })
+        son.addEventListener('click',function(e){
+            alert('i am son')
+            e.stopPropagation()
+        })
+        document.addEventListener('click',function(){
+            alert('i am grandfather')
+
+        })
+        
+        //阻止默认行为
+        let a=document.querySelector('a')
+        a.addEventListener('click',function(e){
+            e.preventDefault()
+        })
+        
+    </script>
+</body>
+</html>

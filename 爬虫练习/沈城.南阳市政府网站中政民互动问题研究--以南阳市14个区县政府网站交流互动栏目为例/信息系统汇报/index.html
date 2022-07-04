@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-3.5.1/jquery-3.5.1.min.js"></script>
+    <script src="./art-template/template-web.js"></script><!-- 1.导入art-template -->
+</head>
+
+<body>
+    <div id="container"></div>
+    <!-- <script type="text/javascript">一般的script如果没有设置type，则默认值为text/javascript</script> -->
+    <!-- 模板的html结构，必须定义到script中 -->
+    <script type="text/html" id="tpl-user">
+            <h1>{{name}}-----------------{{age}}</h1><!-- 双花括号为art-template的一种语法，表示其中未来将放入一个值 --><!-- 3.定义模板 -->
+            {{@ text}}
+            <div>
+                {{if flag===0}}
+                flag的值为0
+                {{else if flag===1}}
+                flag的值为1
+                {{/if}}
+            </div>
+            <ul>
+                {{each hobby}}
+                <li>索引是：{{$index}},循环项是{{$value}}</li>
+                {{/each}}
+            </ul>
+            <div>{{regTime | dateFormat}}</div>
+    </script>
+    <script>
+        template.defaults.imports.dateFormat = function (date) {
+            var y = date.getFullYear()
+            var m = date.getMonth() + 1
+            var d = date.getDate()
+            return y + '-' + m + '-' + d
+        }//方法一定要定义在调用template函数之前
+        var data = { name: 'zs', age: '18', text: '<h3>测试原文输出</h3>', flag: 1, hobby: ['吃饭', '睡觉', '打豆豆'], regTime: new Date() }//2.定义数据
+        var htmlStr = template('tpl-user', data)//4.调用template函数
+        console.log(htmlStr);
+        $('#container').html(htmlStr)//5.渲染html结构
+        //---------------------------------------------------------------------
+        //标准语法-输出
+        //{{value}}
+        //{{obj.key}}
+        //{{obj['key']}}
+        //{{a?b:c}}
+        //{{a||b}}
+        //{{a+b}}
+        //-----------------------------
+        //标准语法-原文输出
+        //{{@ value}}
+        //如果要输出的value值中，包含了HTML标签结构，则需要使用原文输出语法，才能保证HTML标签被正常渲染
+        //-----------------------------
+        //标准语法-条件输出
+        //如果要实现条件输出，则可以在{{}}中使用if...else if.../if的方式，进行按需输出
+        //{{if value}}按需输出的内容{{/if}}
+        //{{if vl}}按需输出的内容{{else if v2}}按需输出的内容{{/if}}
+        //-----------------------------
+        //标准语法-循环输出
+        //如果要实现循环输出，则可以在{{}}内，通过each语法循环数组，当前循环的索引使用$index进行访问
+        //{{each arr}}
+        //  {{$index}} {{$value}}
+        //{{/each}}
+        //-----------------------------
+        //标准语法-过滤器
+        //{{value | filterName}}   value：参数，filterName：函数，|：管道操作符
+        //定义过滤器的基本语法如下：template.defaults.imports.filterName=function(value){/*return处理的结果*/}
+    </script>
+</body>
+
+</html>

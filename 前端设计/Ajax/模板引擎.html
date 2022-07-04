@@ -1,0 +1,55 @@
+<!--
+ * @Author: error: git config user.name && git config user.email & please set dead value or install git
+ * @Date: 2022-05-25 16:59:06
+ * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
+ * @LastEditTime: 2022-05-25 17:35:04
+ * @FilePath: \前端设计\Ajax、Git\模板引擎.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-3.5.1/jquery-3.5.1.min.js"></script>
+    <script src="./art-template/template-web.js"></script>
+</head>
+<body>
+    <div id="title"></div>
+    <div>姓名:<span id="name"></span></div>
+    <div>年龄:<span id="age"></span></div>
+    <div>会员:<span id="isVIP"></span></div>
+    <div>注册时间:<span id="regTime"></span></div>
+    <div>爱好:
+        <ul id="hobby">
+            <li>爱好1</li>
+            <li>爱好2</li>
+        </ul>
+    </div>
+    <script>
+        var data={
+            title:'<h3>用户信息</h3>',
+            name:'zs',
+            age:20,
+            isVIP:true,
+            regTime:new Date(),
+            hobby:['吃饭','睡觉','打豆豆']
+        }
+        $(function(){
+            $('#name').html(data.name)
+            $('#title').html(data.title)
+            $('#age').html(data.age)
+            $('#isVIP').html(data.isVIP)
+            $('#regTime').html(data.regTime.toLocaleString())
+            var rows=[]
+            $.each(data.hobby,function(i,item){
+                rows.push('<li>'+item+'</li>')
+            })
+            $('#hobby').html(rows.join(''))
+        })
+    </script>
+    <!-- ---------------------------------传统方法------------------------------------------ -->
+</body>
+</html>

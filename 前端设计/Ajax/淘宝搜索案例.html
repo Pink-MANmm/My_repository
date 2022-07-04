@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-3.5.1/jquery-3.5.1.min.js"></script>
+    <script src="./art-template/template-web.js"></script>
+    <style>
+        html {
+            cursor: none;
+        }
+
+        input {
+            cursor: none;
+        }
+
+        button {
+            cursor: none;
+        }
+
+        img {
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="../三件套入门+Dom+Bom+正则表达式/img/totop_hover.png" alt="" id="angel"
+        style="width: 20px;height:20px;position: absolute;">
+    <div>
+        <input type="text" placeholder="搜些什么" id="ipt">
+        <div id="searchList" style="display: none;">
+        </div>
+    </div>
+    <button style="position: absolute;left: 185px;top: 8px;">搜索</button>
+    <script type="text/html" id="taobao">
+        <ul style="padding:0;width:168.5px;border-bottom: 1px solid rgb(245, 242, 242);">
+            {{each result}}
+            <li style="background-color:rgb(220, 214, 214);width:166.4px;list-style: none;border-top: 1px solid rgb(251, 248, 248);border-left: 1px solid rgb(250, 246, 246);border-right: 1px solid rgb(246, 241, 241);">{{$value | info}}</li>
+            {{/each}}
+        </ul>
+        </script>
+    <script>
+        $(function () {
+            var timer = null
+            //定义缓存对象cacheObj
+            var cacheObj = {}
+            //防抖函数，节约请求资源
+            function debounceSearch(keywords) {
+                timer = setTimeout(function () {
+                    getSuggestList(keywords)
+                }, 500)
+            }
+            $('#ipt').on('keyup', function () {
+                var keywords = $(this).val().trim()
+                if (keywords.length <= 0) {
+                    return
+                }
+                if (cacheObj[keywords]) {
+                    return suggestList(cacheObj[keywords])
+                }
+                //若再次调用相同的keywords则直接使用缓存cacheObj中的数据
+                clearTimeout(timer)
+                debounceSearch(keywords)
+            })
+            $('#ipt').on('focus', function () {
+                $('#searchList').show()
+            })
+            $('#ipt').on('blur', function () {
+                $('#searchList').hide()
+            })
+            function getSuggestList(kw) {
+                $.ajax({
+                    url: 'https://suggest.taobao.com/sug?q=' + kw,
+                    dataType: 'jsonp',
+                    success: function (res) {
+                        console.log(res);
+                        suggestList(res)
+                    }
+                })
+            }
+            function suggestList(res) {
+                var k = $('#ipt').val().trim()
+                cacheObj[k] = res
+                template.defaults.imports.info = function (data) {
+                    var product = data[0]
+                    return product
+                }
+                var htmlStr = template('taobao', res)
+                $('#searchList').html(htmlStr)
+            }
+            //------------------------额外知识：鼠标跟随与节流(控制事件触发的频率)---------------------------
+            var angel = $('#angel')
+            var timer1 = null//节流阀
+            $(document).on('mousemove', function (e) {                             //
+                if (timer1) { return }                                             //
+                timer1 = setTimeout(function () {                                  //
+                    (angel).css('left', e.pageX + 'px').css('top', e.pageY + 'px') //节流器
+                    console.log('ok');                                             //
+                    timer1 = null                                                  //
+                }, 16)                                                             //
+            })                                                                     //
+        })
+
+    </script>
+</body>
+
+</html>

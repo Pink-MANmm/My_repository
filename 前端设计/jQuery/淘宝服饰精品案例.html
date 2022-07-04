@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 1000px;
+        }
+
+        #wraper {
+            position: relative;
+            width: 600px;
+            height: 399px;
+            margin: 50px auto;
+            border: 2px solid black;
+        }
+
+        #center li {
+            display: none;
+            width: 400px;
+            height: 400px;
+
+        }
+
+        #left {
+            position: absolute;
+            margin: 0;
+            display: inline-block;
+            width: 100px;
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        #center {
+            position: absolute;
+            margin: 0;
+            display: inline-block;
+            left: 100px;
+            width: 400px;
+            list-style: none;
+            background-color: red;
+            padding: 0;
+        }
+
+        #right {
+            position: absolute;
+            margin: 0;
+            display: inline-block;
+            right: 0;
+            width: 100px;
+            list-style: none;
+            text-align: center;
+            padding: 0;
+        }
+
+        #left li {
+            border-bottom: 2px solid black;
+            height: 48px;
+            font: normal 30px/48px '宋体';
+            cursor: pointer;
+        }
+
+        #right li {
+            border-bottom: 2px solid black;
+            height: 48px;
+            font: normal 30px/48px '宋体';
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wraper">
+        <ul id="left">
+            <li>女鞋</li>
+            <li>雪地靴</li>
+            <li>冬裙</li>
+            <li>呢大衣</li>
+            <li>毛衣</li>
+            <li>棉服</li>
+            <li>内裤</li>
+            <li>羽绒服</li>
+        </ul>
+        <ul id="center">
+            <li style="display: list-item;">女鞋</li>
+            <li>雪地靴</li>
+            <li>冬裙</li>
+            <li>呢大衣</li>
+            <li>毛衣</li>
+            <li>棉服</li>
+            <li>内裤</li>
+            <li>羽绒服</li>
+            <li>女包</li>
+            <li>男包</li>
+            <li>登山鞋</li>
+            <li>皮带</li>
+            <li>围巾</li>
+            <li>皮衣</li>
+            <li>男毛衣</li>
+            <li>男棉服</li>
+        </ul>
+        <ul id="right">
+            <li>女包</li>
+            <li>男包</li>
+            <li>登山鞋</li>
+            <li>皮带</li>
+            <li>围巾</li>
+            <li>皮衣</li>
+            <li>男毛衣</li>
+            <li>男棉服</li>
+        </ul>
+    </div>
+</body>
+
+</html>
+<script src="jquery-3.5.1/jquery-3.5.1.min.js"></script>\
+<script>
+    $(function () {
+        $('#left>li').mouseenter(function () {
+            var idx = $(this).index()
+            console.log(idx);
+            $(this).css('backgroundColor', 'red').siblings().css('backgroundColor', 'white').parent().siblings('#right').children('li').css('backgroundColor', 'white')
+            //$('#center>li:eq('+idx+')')
+            $('#center>li').eq(idx).css('display', 'list-item').siblings().css('display', 'none')
+        })
+        $('#right>li').mouseenter(function () {
+            var idx = $(this).index() + 8
+            console.log(idx);
+            $(this).css('backgroundColor', 'red').siblings().css('backgroundColor', 'white').parent().siblings('#left').children('li').css('backgroundColor', 'white')
+            //$('#center>li:eq('+idx+')')
+            $('#center>li').eq(idx).css('display', 'list-item').siblings().css('display', 'none')
+        })
+    })
+</script>

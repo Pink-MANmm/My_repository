@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./axios/axios-master/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <script>
+        //相较于jQuery，axios更加轻量化，只专注于网络数据请求
+        //axios.get('url',{params:{/*参数*/}}).then(callback)
+        var url = 'http://www.liulongbin.top:3006/api/get'
+        var params = { name: 'zs', age: 20 }
+        axios.get(url, { params: params }).then(function (res) {
+            var result = res.data
+            console.log(res);
+            console.log(result);
+        })
+        var url1 = 'http://www.liulongbin.top:3006/api/post'
+        var dataObj = { location: '北京', address: '顺义' }
+        axios.post(url1, dataObj).then(function (res) {
+            var result2 = res.data
+            console.log(res);
+            console.log(result2);
+        })
+        //axios也提供了类似于jQuery中$.ajax()的函数
+        axios({
+            method: '请求类型',
+            url: '请求的URL地址',
+            data: { post数据 },//dataObj
+            params: { get数据 },//params
+        }).then(callback)
+    </script>
+</body>
+
+</html>

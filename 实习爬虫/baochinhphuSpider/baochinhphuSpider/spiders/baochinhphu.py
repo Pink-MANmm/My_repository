@@ -11,7 +11,7 @@ class BaochinhphuSpider(scrapy.Spider):
     start_urls = ['http://cn.baochinhphu.vn/%E6%97%B6%E6%94%BF%E5%A4%96%E4%BA%A4.htm']
 
     def start_requests(self):
-        for page in range(2,1000):
+        for page in range(1,1000):
             url=f'https://cn.baochinhphu.vn/timelinelist/1161087/{page}.htm'
             yield scrapy.Request(url=url)
 
